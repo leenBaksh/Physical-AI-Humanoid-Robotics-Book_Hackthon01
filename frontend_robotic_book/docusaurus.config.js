@@ -11,7 +11,8 @@ import {themes as prismThemes} from 'prism-react-renderer';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: "Physical AI & Humanoid Robotics Book",
-  tagline: "Dinosaurs are cool",
+  tagline:
+    "Learn about ROS-2 as the middleware nervous system for Physical AI & Humanoid Robotics Book",
   favicon: "img/favicon.ico",
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future

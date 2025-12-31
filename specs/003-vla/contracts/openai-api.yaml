@@ -1,0 +1,290 @@
+# API Contracts: Vision-Language-Action (VLA) Module
+
+## Overview
+
+This document describes the API contracts for the Vision-Language-Action module, focusing on the integration with OpenAI services and ROS 2 interfaces for the cognitive robotics pipeline.
+
+## OpenAI Whisper API Integration
+
+### Audio Transcription Endpoint
+
+```yaml
+openapi: 3.0.0
+info:
+  title: OpenAI Whisper Transcription API
+  description: API for converting audio to text using OpenAI Whisper
+  version: 1.0.0
+
+paths:
+  /v1/audio/transcriptions:
+    post:
+      summary: Create transcription from audio
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+                - model
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Audio file to transcribe
+                model:
+                  type: string
+                  enum: [whisper-1]
+                  description: Model to use for transcription
+                response_format:
+                  type: string
+                  enum: [json, text, srt, verbose_json, vtt]
+                  default: json
+                  description: Format of the response
+                language:
+                  type: string
+                  description: Language of the input audio
+                temperature:
+                  type: number
+                  minimum: 0
+                  maximum: 1
+                  default: 0
+                  description: Temperature for sampling
+                timestamp_granularities[]:
+                  type: array
+                  items:
+                    type: string
+                    enum: [segment]
+                  description: Granularities of timestamp
+      responses:
+        '200':
+          description: Successful transcription
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  text:
+                    type: string
+                    description: Transcribed text
+                  language:
+                    type: string
+                    description: Detected language
+                  duration:
+                    type: number
+                    description: Audio duration in seconds
+                  segments:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                        seek:
+                          type: integer
+                        start:
+                          type: number
+                        end:
+                          type: number
+                        text:
+                          type: string
+                        tokens:
+                          type: array
+                          items:
+                            type: integer
+                        temperature:
+                          type: number
+                        avg_logprob:
+                          type: number
+                        compression_ratio:
+                          type: number
+                        no_speech_prob:
+                          type: number
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+```
+
+## OpenAI LLM API Integration
+
+### Chat Completions Endpoint
+
+```yaml
+openai: 3.0.0
+info:
+  title: OpenAI Chat Completions API
+  description: API for generating chat completions using OpenAI models
+  version: 1.0.0
+
+paths:
+  /v1/chat/completions:
+    post:
+      summary: Create a chat completion
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - model
+                - messages
+              properties:
+                model:
+                  type: string
+                  description: ID of the model to use
+                  example: "gpt-4-turbo"
+                messages:
+                  type: array
+                  items:
+                    type: object
+                    required:
+                      - role
+                      - content
+                    properties:
+                      role:
+                        type: string
+                        enum: [system, user, assistant]
+                      content:
+                        type: string
+                temperature:
+                  type: number
+                  minimum: 0
+                  maximum: 2
+                  default: 1
+                max_tokens:
+                  type: integer
+                  description: Maximum tokens to generate
+                response_format:
+                  type: object
+                  properties:
+                    type:
+                      type: string
+                      enum: [text, json_object]
+      responses:
+        '200':
+          description: Successful completion
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  object:
+                    type: string
+                  created:
+                    type: integer
+                  model:
+                    type: string
+                  choices:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        index:
+                          type: integer
+                        message:
+                          type: object
+                          properties:
+                            role:
+                              type: string
+                            content:
+                              type: string
+                        finish_reason:
+                          type: string
+                  usage:
+                    type: object
+                    properties:
+                      prompt_tokens:
+                        type: integer
+                      completion_tokens:
+                        type: integer
+                      total_tokens:
+                        type: integer
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+```
+
+## ROS 2 Interface Contracts
+
+### Whisper Node Topics
+
+```yaml
+# ROS 2 Topics for Whisper Node
+topics:
+  /audio_input:
+    type: sensor_msgs/msg/AudioData
+    direction: input
+    description: Raw audio data input for transcription
+  /whisper/transcription:
+    type: std_msgs/msg/String
+    direction: output
+    description: Transcribed text output from Whisper
+  /whisper/status:
+    type: std_msgs/msg/String
+    direction: output
+    description: Status updates from Whisper node
+```
+
+### LLM Action Server
+
+```yaml
+# ROS 2 Action for LLM Planning
+action:
+  /llm_plan:
+    type: llm_interfaces/action/NaturalLanguageCommand
+    description: Action server for converting natural language to action plans
+    goal:
+      command: string
+      context: string
+    result:
+      plan: string  # JSON string containing action sequence
+      success: bool
+      error_message: string
+    feedback:
+      status: string
+      progress: float
+```
+
+### Cognitive Pipeline Topics
+
+```yaml
+# ROS 2 Topics for Cognitive Pipeline
+topics:
+  /vla/voice_command:
+    type: std_msgs/msg/String
+    direction: input
+    description: Voice command input to the cognitive pipeline
+  /vla/action_plan:
+    type: std_msgs/msg/String
+    direction: output
+    description: Generated action plan from LLM
+  /vla/pipeline_status:
+    type: std_msgs/msg/String
+    direction: output
+    description: Status updates from the cognitive pipeline
+```
+
+## Security Considerations
+
+### API Key Management
+- API keys should be stored securely and not hard-coded
+- Use environment variables or secure key management systems
+- Implement proper authentication and authorization
+
+### Data Privacy
+- Audio data may contain sensitive information
+- Ensure proper data handling and privacy protection
+- Consider local processing options to minimize data transmission

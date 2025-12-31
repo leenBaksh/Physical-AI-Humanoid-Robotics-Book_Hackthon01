@@ -1,0 +1,708 @@
+/**
+ * ART DECO DOCUSAURUS THEME - FULL RESPONSIVE SIZING
+ * Complete media screen coverage with Art Deco aesthetic
+ */
+
+/* ========== ART DECO VARIABLES ========== */
+:root {
+  /* Art Deco color palette */
+  --ifm-color-primary: #d4af37; /* Gold */
+  --ifm-color-primary-dark: #b8941f;
+  --ifm-color-primary-darker: #9c7a0f;
+  --ifm-color-primary-darkest: #7d6200;
+  --ifm-color-primary-light: #e6c158;
+  --ifm-color-primary-lighter: #f0d483;
+  --ifm-color-primary-lightest: #f8e9b9;
+  
+  /* Secondary colors */
+  --artdeco-black: #1a1a1a;
+  --artdeco-ivory: #f5f1e6;
+  --artdeco-burgundy: #8b0000;
+  --artdeco-teal: #006666;
+  
+  /* Typography */
+  --ifm-font-family-base: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+  --ifm-font-family-heading: 'Cinzel', 'Georgia', serif;
+  --ifm-font-family-mono: 'Courier Prime', 'Courier New', monospace;
+  
+  /* Art Deco patterns */
+  --deco-pattern: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(212, 175, 55, 0.05) 10px,
+    rgba(212, 175, 55, 0.05) 20px
+  );
+}
+
+/* ========== BASE SIZING FOR ALL SCREENS ========== */
+:root {
+  /* Base typography */
+  --ifm-font-size-base: 17px;
+  --ifm-line-height-base: 1.7;
+  
+  /* Base spacing */
+  --ifm-spacing-horizontal: 3rem;
+  --ifm-spacing-vertical: 2.5rem;
+  
+  /* Component sizing */
+  --ifm-navbar-height: 6rem;
+  --ifm-footer-height: 12rem;
+  --ifm-global-radius: 0;
+  
+  /* Layout widths - Default for desktop */
+  --layout-max-width: 1400px;
+  --content-max-width: 1000px;
+  --card-max-width: 1000px;
+  
+  /* Hero sizing */
+  --hero-min-height: 600px;
+  --hero-padding-vertical: 10rem;
+  --hero-title-size: 4rem;
+  --hero-subtitle-size: 1.5rem;
+  
+  /* Card sizing */
+  --card-padding: 3rem;
+  --card-margin-vertical: 3rem;
+  --card-corner-size: 40px;
+  --card-title-size: 2rem;
+  --card-border-width: 3px;
+  
+  /* Typography scaling */
+  --h1-size: 4rem;
+  --h2-size: 2.5rem;
+  --h3-size: 2rem;
+  --h4-size: 1.75rem;
+  --h5-size: 1.5rem;
+  --h6-size: 1.25rem;
+  
+  /* Button sizing */
+  --button-padding-vertical: 1rem;
+  --button-padding-horizontal: 3rem;
+  --button-font-size: 1rem;
+  --button-min-height: 56px;
+  --button-border-width: 3px;
+}
+
+/* ========== COMPREHENSIVE MEDIA SCREEN SIZING ========== */
+
+/* 1. ULTRA-WIDE DISPLAYS (21:9 and wider) */
+@media screen and (min-width: 2560px) and (min-aspect-ratio: 21/9) {
+  :root {
+    --layout-max-width: 1800px;
+    --content-max-width: 1400px;
+    --card-max-width: 1300px;
+    --hero-min-height: 800px;
+    --hero-padding-vertical: 12rem;
+    --hero-title-size: 5.5rem;
+    --hero-subtitle-size: 2rem;
+    --ifm-spacing-horizontal: 4rem;
+    --card-padding: 4rem;
+    --card-corner-size: 50px;
+    --h1-size: 5rem;
+    --h2-size: 3.5rem;
+    --h3-size: 2.75rem;
+  }
+  
+  /* Ultra-wide specific decorative elements */
+  body::before {
+    height: 12px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--ifm-color-primary),
+      var(--ifm-color-primary) 20px,
+      transparent 20px,
+      transparent 40px
+    );
+  }
+  
+  .navbar::after {
+    height: 4px;
+    background: linear-gradient(90deg, 
+      transparent 5%, 
+      var(--ifm-color-primary) 5%, 
+      var(--ifm-color-primary) 95%, 
+      transparent 95%);
+  }
+}
+
+/* 2. 4K DISPLAYS (3840px and above) */
+@media screen and (min-width: 3840px) {
+  :root {
+    --layout-max-width: 2200px;
+    --content-max-width: 1600px;
+    --card-max-width: 1500px;
+    --hero-min-height: 900px;
+    --hero-title-size: 6rem;
+    --hero-subtitle-size: 2.25rem;
+    --ifm-font-size-base: 20px;
+    --card-padding: 5rem;
+    --card-corner-size: 60px;
+    --h1-size: 6rem;
+    --h2-size: 4rem;
+    --h3-size: 3rem;
+  }
+  
+  .hero__buttons {
+    gap: 3rem !important;
+  }
+  
+  .button {
+    --button-padding-horizontal: 4rem;
+    --button-font-size: 1.125rem;
+    --button-min-height: 64px;
+  }
+}
+
+/* 3. WIDESCREEN DESKTOP (1920px - 2559px) */
+@media screen and (min-width: 1920px) and (max-width: 2559px) {
+  :root {
+    --layout-max-width: 1600px;
+    --content-max-width: 1200px;
+    --card-max-width: 1100px;
+    --hero-min-height: 700px;
+    --hero-padding-vertical: 8rem;
+    --hero-title-size: 4.5rem;
+    --hero-subtitle-size: 1.75rem;
+    --card-padding: 3.5rem;
+    --card-corner-size: 45px;
+    --h1-size: 4.5rem;
+    --h2-size: 3rem;
+    --h3-size: 2.25rem;
+  }
+}
+
+/* 4. STANDARD DESKTOP (1440px - 1919px) */
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+  :root {
+    --layout-max-width: 1400px;
+    --content-max-width: 1100px;
+    --card-max-width: 1000px;
+    --hero-min-height: 650px;
+    --hero-padding-vertical: 8rem;
+  }
+}
+
+/* 5. SMALL DESKTOP/LAPTOP (1024px - 1439px) */
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  :root {
+    --layout-max-width: 1200px;
+    --content-max-width: 900px;
+    --card-max-width: 900px;
+    --hero-min-height: 550px;
+    --hero-padding-vertical: 7rem;
+    --hero-title-size: 3.5rem;
+    --hero-subtitle-size: 1.375rem;
+    --ifm-spacing-horizontal: 2.5rem;
+    --card-padding: 2.5rem;
+    --card-corner-size: 35px;
+    --h1-size: 3.5rem;
+    --h2-size: 2.25rem;
+    --h3-size: 1.875rem;
+  }
+}
+
+/* 6. TABLET LANDSCAPE (768px - 1023px, landscape) */
+@media screen and (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+  :root {
+    --layout-max-width: 100%;
+    --content-max-width: 800px;
+    --card-max-width: 800px;
+    --hero-min-height: 500px;
+    --hero-padding-vertical: 6rem;
+    --hero-title-size: 3rem;
+    --hero-subtitle-size: 1.25rem;
+    --ifm-spacing-horizontal: 2rem;
+    --ifm-font-size-base: 16px;
+    --card-padding: 2.25rem;
+    --card-corner-size: 30px;
+    --card-border-width: 2px;
+    --h1-size: 3rem;
+    --h2-size: 2rem;
+    --h3-size: 1.75rem;
+    --button-border-width: 2px;
+  }
+  
+  /* Tablet landscape specific adjustments */
+  .navbar__inner {
+    gap: 2rem;
+  }
+  
+  .navbar__items {
+    gap: 1.5rem;
+  }
+}
+
+/* 7. TABLET PORTRAIT (768px - 1023px, portrait) */
+@media screen and (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+  :root {
+    --layout-max-width: 100%;
+    --content-max-width: 700px;
+    --card-max-width: 700px;
+    --hero-min-height: 550px;
+    --hero-padding-vertical: 6rem;
+    --hero-title-size: 3.25rem;
+    --hero-subtitle-size: 1.375rem;
+    --ifm-spacing-horizontal: 2rem;
+    --ifm-font-size-base: 16px;
+    --card-padding: 2.5rem;
+    --card-corner-size: 30px;
+    --h1-size: 3.25rem;
+    --h2-size: 2.125rem;
+    --h3-size: 1.75rem;
+  }
+  
+  .navbar__inner {
+    grid-template-columns: auto 1fr;
+  }
+}
+
+/* 8. LARGE MOBILE LANDSCAPE (576px - 767px, landscape) */
+@media screen and (min-width: 576px) and (max-width: 767px) and (orientation: landscape) {
+  :root {
+    --layout-max-width: 100%;
+    --content-max-width: 90%;
+    --card-max-width: 90%;
+    --hero-min-height: 400px;
+    --hero-padding-vertical: 4rem;
+    --hero-title-size: 2.5rem;
+    --hero-subtitle-size: 1.125rem;
+    --ifm-spacing-horizontal: 1.5rem;
+    --ifm-font-size-base: 15px;
+    --card-padding: 2rem;
+    --card-corner-size: 25px;
+    --card-margin-vertical: 2rem;
+    --h1-size: 2.5rem;
+    --h2-size: 1.875rem;
+    --h3-size: 1.5rem;
+    --button-padding-vertical: 0.875rem;
+    --button-padding-horizontal: 2rem;
+    --button-font-size: 0.875rem;
+    --button-min-height: 48px;
+  }
+  
+  .hero__buttons {
+    flex-direction: row !important;
+    gap: 1rem !important;
+  }
+}
+
+/* 9. LARGE MOBILE PORTRAIT (576px - 767px, portrait) */
+@media screen and (min-width: 576px) and (max-width: 767px) and (orientation: portrait) {
+  :root {
+    --layout-max-width: 100%;
+    --content-max-width: 90%;
+    --card-max-width: 90%;
+    --hero-min-height: 500px;
+    --hero-padding-vertical: 5rem;
+    --hero-title-size: 2.75rem;
+    --hero-subtitle-size: 1.25rem;
+    --ifm-spacing-horizontal: 1.5rem;
+    --ifm-font-size-base: 16px;
+    --card-padding: 2rem;
+    --card-corner-size: 25px;
+    --h1-size: 2.75rem;
+    --h2-size: 2rem;
+    --h3-size: 1.625rem;
+  }
+  
+  .navbar__inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .hero__buttons {
+    flex-direction: column;
+    gap: 1rem !important;
+  }
+}
+
+/* 10. SMALL MOBILE LANDSCAPE (375px - 575px, landscape) */
+@media screen and (min-width: 375px) and (max-width: 575px) and (orientation: landscape) {
+  :root {
+    --layout-max-width: 100%;
+    --content-max-width: 95%;
+    --card-max-width: 95%;
+    --hero-min-height: 350px;
+    --hero-padding-vertical: 3rem;
+    --hero-title-size: 2rem;
+    --hero-subtitle-size: 1rem;
+    --ifm-spacing-horizontal: 1rem;
+    --ifm-font-size-base: 14px;
+    --card-padding: 1.5rem;
+    --card-corner-size: 20px;
+    --card-margin-vertical: 1.5rem;
+    --h1-size: 2rem;
+    --h2-size: 1.625rem;
+    --h3-size: 1.375rem;
+    --button-padding-vertical: 0.75rem;
+    --button-padding-horizontal: 1.5rem;
+    --button-min-height: 44px;
+  }
+  
+  .navbar__items {
+    gap: 0.75rem;
+  }
+  
+  .navbar__link {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* 11. SMALL MOBILE PORTRAIT (375px - 575px, portrait) */
+@media screen and (min-width: 375px) and (max-width: 575px) and (orientation: portrait) {
+  :root {
+    --layout-max-width: 100%;
+    --content-max-width: 95%;
+    --card-max-width: 95%;
+    --hero-min-height: 450px;
+    --hero-padding-vertical: 4rem;
+    --hero-title-size: 2.25rem;
+    --hero-subtitle-size: 1.125rem;
+    --ifm-spacing-horizontal: 1rem;
+    --ifm-font-size-base: 15px;
+    --card-padding: 1.75rem;
+    --card-corner-size: 20px;
+    --h1-size: 2.25rem;
+    --h2-size: 1.75rem;
+    --h3-size: 1.5rem;
+  }
+}
+
+/* 12. EXTRA SMALL MOBILE (below 374px) */
+@media screen and (max-width: 374px) {
+  :root {
+    --layout-max-width: 100%;
+    --content-max-width: 100%;
+    --card-max-width: 100%;
+    --hero-min-height: 400px;
+    --hero-padding-vertical: 3rem;
+    --hero-title-size: 1.875rem;
+    --hero-subtitle-size: 1rem;
+    --ifm-spacing-horizontal: 0.75rem;
+    --ifm-font-size-base: 14px;
+    --card-padding: 1.5rem;
+    --card-corner-size: 15px;
+    --card-margin-vertical: 1rem;
+    --h1-size: 1.875rem;
+    --h2-size: 1.5rem;
+    --h3-size: 1.25rem;
+    --button-padding-vertical: 0.625rem;
+    --button-padding-horizontal: 1.25rem;
+    --button-font-size: 0.75rem;
+    --button-min-height: 40px;
+  }
+  
+  .navbar__brand {
+    font-size: 1.25rem !important;
+    gap: 0.5rem;
+  }
+  
+  .hero__buttons {
+    flex-direction: column;
+    gap: 0.75rem !important;
+  }
+}
+
+/* 13. FOLDABLE DEVICES (Short height screens) */
+@media screen and (max-height: 600px) and (orientation: landscape) {
+  :root {
+    --hero-min-height: 300px;
+    --hero-padding-vertical: 2rem;
+    --hero-title-size: 2rem;
+  }
+  
+  .navbar {
+    height: 5rem;
+  }
+  
+  .card {
+    --card-padding: 1.5rem;
+    --card-margin-vertical: 1.5rem;
+  }
+}
+
+/* 14. HIGH-DPI/RETINA DISPLAYS */
+@media screen and (-webkit-min-device-pixel-ratio: 2), 
+       screen and (min-resolution: 192dpi) {
+  body::before {
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 20px,
+      rgba(212, 175, 55, 0.03) 20px,
+      rgba(212, 175, 55, 0.03) 40px
+    );
+  }
+}
+
+/* 15. PRINT STYLES */
+@media print {
+  :root {
+    --ifm-spacing-horizontal: 0.5in;
+    --ifm-spacing-vertical: 0.25in;
+    --hero-min-height: auto;
+    --hero-padding-vertical: 0.5in;
+  }
+  
+  .hero__title {
+    font-size: 24pt !important;
+  }
+  
+  .card {
+    break-inside: avoid;
+    border: 1pt solid #000 !important;
+    --card-padding: 0.25in;
+  }
+  
+  .navbar, .footer {
+    display: none !important;
+  }
+}
+
+/* ========== APPLY VARIABLES TO COMPONENTS ========== */
+
+/* Main container */
+.container {
+  max-width: var(--layout-max-width) !important;
+  padding-left: var(--ifm-spacing-horizontal);
+  padding-right: var(--ifm-spacing-horizontal);
+}
+
+/* Content area */
+.main-wrapper {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--ifm-spacing-horizontal);
+  animation: fadeInDeco 0.8s ease-out;
+}
+
+/* Hero banner */
+.hero {
+  min-height: var(--hero-min-height);
+  padding: var(--hero-padding-vertical) var(--ifm-spacing-horizontal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  background: var(--ifm-background-color);
+}
+
+.hero__title {
+  font-size: var(--hero-title-size) !important;
+  margin-bottom: 3rem !important;
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero__subtitle {
+  font-size: var(--hero-subtitle-size) !important;
+  max-width: calc(var(--content-max-width) * 0.7);
+  margin: 0 auto 4rem auto !important;
+  line-height: 1.8;
+}
+
+.hero__buttons {
+  margin-top: 4rem !important;
+  gap: 2rem !important;
+}
+
+/* Cards */
+.card {
+  background: var(--ifm-background-surface-color);
+  border: var(--card-border-width) solid var(--ifm-color-primary);
+  position: relative;
+  padding: var(--card-padding);
+  margin: var(--card-margin-vertical) auto;
+  overflow: visible;
+  max-width: var(--card-max-width);
+  width: 100%;
+}
+
+.card::before,
+.card::after {
+  content: '';
+  position: absolute;
+  width: var(--card-corner-size);
+  height: var(--card-corner-size);
+  border: var(--card-border-width) solid var(--ifm-color-primary);
+}
+
+.card::before {
+  top: calc(var(--card-corner-size) * -0.5);
+  left: calc(var(--card-corner-size) * -0.5);
+  border-right: none;
+  border-bottom: none;
+}
+
+.card::after {
+  bottom: calc(var(--card-corner-size) * -0.5);
+  right: calc(var(--card-corner-size) * -0.5);
+  border-left: none;
+  border-top: none;
+}
+
+.card__title {
+  font-size: var(--card-title-size) !important;
+}
+
+/* Typography */
+h1 { font-size: var(--h1-size) !important; }
+h2 { font-size: var(--h2-size) !important; }
+h3 { font-size: var(--h3-size) !important; }
+h4 { font-size: var(--h4-size) !important; }
+h5 { font-size: var(--h5-size) !important; }
+h6 { font-size: var(--h6-size) !important; }
+
+body {
+  font-size: var(--ifm-font-size-base);
+  line-height: var(--ifm-line-height-base);
+}
+
+/* Buttons */
+.button {
+  border: var(--button-border-width) solid var(--ifm-color-primary);
+  padding: var(--button-padding-vertical) var(--button-padding-horizontal);
+  font-size: var(--button-font-size);
+  min-height: var(--button-min-height);
+}
+
+/* Navbar */
+.navbar {
+  height: var(--ifm-navbar-height);
+  padding: 0 var(--ifm-spacing-horizontal);
+}
+
+/* Footer */
+.footer {
+  padding: calc(var(--ifm-spacing-vertical) * 2) 0;
+  margin-top: calc(var(--ifm-spacing-vertical) * 2.5);
+}
+
+.footer__links {
+  max-width: var(--layout-max-width);
+  padding: 0 var(--ifm-spacing-horizontal);
+}
+
+/* ========== DARK/LIGHT THEMES ========== */
+html[data-theme='light'] {
+  --ifm-background-color: var(--artdeco-ivory);
+  --ifm-background-surface-color: #ffffff;
+  --ifm-navbar-background-color: var(--artdeco-ivory);
+  --ifm-footer-background-color: var(--artdeco-black);
+  --ifm-font-color-base: var(--artdeco-black);
+  --ifm-heading-color: var(--artdeco-black);
+}
+
+html[data-theme='dark'] {
+  --ifm-color-primary: #e6c158;
+  --ifm-color-primary-dark: #d4af37;
+  --ifm-color-primary-darker: #b8941f;
+  --ifm-color-primary-darkest: #9c7a0f;
+  --ifm-background-color: var(--artdeco-black);
+  --ifm-background-surface-color: #2a2a2a;
+  --ifm-navbar-background-color: var(--artdeco-black);
+  --ifm-footer-background-color: #000000;
+  --ifm-font-color-base: #e0e0e0;
+  --ifm-heading-color: #ffffff;
+}
+
+/* ========== ACCESSIBILITY FEATURES ========== */
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .hero {
+    animation: none;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  :root {
+    --ifm-color-primary: #ff4800;
+    --ifm-color-primary-dark: #b8330b;
+  }
+  
+  .card {
+    border-width: 4px;
+  }
+}
+
+/* ========== UTILITY CLASSES FOR MANUAL OVERRIDES ========== */
+
+/* Width utilities */
+.w-screen { width: 100vw !important; }
+.max-w-full { max-width: 100% !important; }
+.max-w-screen-sm { max-width: 640px !important; }
+.max-w-screen-md { max-width: 768px !important; }
+.max-w-screen-lg { max-width: 1024px !important; }
+.max-w-screen-xl { max-width: 1280px !important; }
+.max-w-screen-2xl { max-width: 1536px !important; }
+.max-w-screen-3xl { max-width: 1920px !important; }
+
+/* Height utilities */
+.min-h-screen { min-height: 100vh !important; }
+.min-h-50vh { min-height: 50vh !important; }
+.min-h-75vh { min-height: 75vh !important; }
+
+/* Container utilities */
+.container-fluid {
+  max-width: 100% !important;
+  padding-left: var(--ifm-spacing-horizontal);
+  padding-right: var(--ifm-spacing-horizontal);
+}
+
+.container-fixed {
+  max-width: var(--layout-max-width) !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeInDeco {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Geometric decorations */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 8px;
+  background: var(--deco-pattern);
+  z-index: 1000;
+}
+
+.navbar::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 10%, 
+    var(--ifm-color-primary) 10%, 
+    var(--ifm-color-primary) 90%, 
+    transparent 90%);
+}

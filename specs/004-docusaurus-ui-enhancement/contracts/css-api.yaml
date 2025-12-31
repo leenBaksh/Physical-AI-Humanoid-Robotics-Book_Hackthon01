@@ -1,0 +1,266 @@
+# CSS API Contract: Docusaurus UI Enhancement System
+
+## Overview
+This CSS API contract defines the interface for the enhanced Docusaurus UI system with responsive typography and color scaling.
+
+## CSS Custom Properties
+
+### Typography Properties
+The following CSS custom properties control typography scaling:
+
+#### Base Font Size
+- **Property**: `--ifm-font-size-base`
+- **Type**: CSS length
+- **Default**: `clamp(0.875rem, 0.75rem + 0.625vw, 1.125rem)` (14px to 18px)
+- **Description**: Base font size that scales from mobile to desktop
+- **Usage**: `font-size: var(--ifm-font-size-base);`
+
+#### Heading Sizes
+- **Property**: `--ifm-h1-font-size`
+- **Type**: CSS length
+- **Default**: `clamp(2.125rem, 1.75rem + 1.875vw, 3.438rem)` (~34px to ~55px)
+- **Description**: H1 heading size with fluid scaling
+
+- **Property**: `--ifm-h2-font-size`
+- **Type**: CSS length
+- **Default**: `clamp(1.75rem, 1.5rem + 1.25vw, 2.75rem)` (~28px to ~44px)
+- **Description**: H2 heading size with fluid scaling
+
+- **Property**: `--ifm-h3-font-size`
+- **Type**: CSS length
+- **Default**: `clamp(1.5rem, 1.25rem + 1.25vw, 2.125rem)` (~24px to ~34px)
+- **Description**: H3 heading size with fluid scaling
+
+- **Property**: `--ifm-h4-font-size`
+- **Type**: CSS length
+- **Default**: `clamp(1.25rem, 1.125rem + 0.625vw, 1.5rem)` (~20px to ~24px)
+- **Description**: H4 heading size with fluid scaling
+
+- **Property**: `--ifm-h5-font-size`
+- **Type**: CSS length
+- **Default**: `clamp(1.125rem, 1.0625rem + 0.3125vw, 1.25rem)` (~18px to ~20px)
+- **Description**: H5 heading size with fluid scaling
+
+- **Property**: `--ifm-h6-font-size`
+- **Type**: CSS length
+- **Default**: `clamp(1rem, 0.9375rem + 0.3125vw, 1.125rem)` (~16px to ~18px)
+- **Description**: H6 heading size with fluid scaling
+
+### Color Properties
+The following CSS custom properties define the color system:
+
+#### Primary Color Spectrum
+- **Property**: `--ifm-color-primary-100`
+- **Type**: CSS color
+- **Default**: `#fde8e8`
+- **Description**: Lightest primary red shade
+
+- **Property**: `--ifm-color-primary-200`
+- **Type**: CSS color
+- **Default**: `#fcd5d5`
+- **Description**: Light primary red shade
+
+- **Property**: `--ifm-color-primary-300`
+- **Type**: CSS color
+- **Default**: `#f9a8a8`
+- **Description**: Light-medium primary red shade
+
+- **Property**: `--ifm-color-primary-400`
+- **Type**: CSS color
+- **Default**: `#f87171`
+- **Description**: Medium primary red shade
+
+- **Property**: `--ifm-color-primary-500`
+- **Type**: CSS color
+- **Default**: `#ef4444`
+- **Description**: Default primary red shade
+
+- **Property**: `--ifm-color-primary-600`
+- **Type**: CSS color
+- **Default**: `#dc2626`
+- **Description**: Dark primary red shade
+
+- **Property**: `--ifm-color-primary-700`
+- **Type**: CSS color
+- **Default**: `#b91c1c`
+- **Description**: Darker primary red shade
+
+- **Property**: `--ifm-color-primary-800`
+- **Type**: CSS color
+- **Default**: `#991b1b`
+- **Description**: Very dark primary red shade
+
+- **Property**: `--ifm-color-primary-900`
+- **Type**: CSS color
+- **Default**: `#7f1d1d`
+- **Description**: Darkest primary red shade
+
+#### Secondary Color Spectrum
+- **Property**: `--ifm-color-secondary-100` to `--ifm-color-secondary-900`
+- **Type**: CSS color
+- **Default**: Blue spectrum from `#dbeafe` to `#1e3a8a`
+- **Description**: Secondary color shades (blue spectrum)
+
+#### Accent Color Spectrum
+- **Property**: `--ifm-color-accent-100` to `--ifm-color-accent-900`
+- **Type**: CSS color
+- **Default**: Emerald spectrum from `#d1fae5` to `#064e3b`
+- **Description**: Accent color shades (emerald spectrum)
+
+#### Semantic Color Roles
+- **Property**: `--ifm-color-primary`
+- **Type**: CSS color
+- **Default**: `var(--ifm-color-primary-600)`
+- **Description**: Primary color for interactive elements
+
+- **Property**: `--ifm-color-secondary`
+- **Type**: CSS color
+- **Default**: `var(--ifm-color-secondary-600)`
+- **Description**: Secondary color for supporting elements
+
+- **Property**: `--ifm-color-accent`
+- **Type**: CSS color
+- **Default**: `var(--ifm-color-accent-600)`
+- **Description**: Accent color for highlights
+
+### Spacing Properties
+- **Property**: `--ifm-spacing-xs`
+- **Type**: CSS length
+- **Default**: `clamp(0.25rem, 0.2rem + 0.25vw, 0.375rem)`
+- **Description**: Extra small spacing with fluid scaling
+
+- **Property**: `--ifm-spacing-sm`
+- **Type**: CSS length
+- **Default**: `clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem)`
+- **Description**: Small spacing with fluid scaling
+
+- **Property**: `--ifm-spacing-md`
+- **Type**: CSS length
+- **Default**: `clamp(0.75rem, 0.6rem + 0.75vw, 1.25rem)`
+- **Description**: Medium spacing with fluid scaling
+
+- **Property**: `--ifm-spacing-lg`
+- **Type**: CSS length
+- **Default**: `clamp(1rem, 0.8rem + 1vw, 1.5rem)`
+- **Description**: Large spacing with fluid scaling
+
+- **Property**: `--ifm-spacing-xl`
+- **Type**: CSS length
+- **Default**: `clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem)`
+- **Description**: Extra large spacing with fluid scaling
+
+- **Property**: `--ifm-spacing-2xl`
+- **Type**: CSS length
+- **Default**: `clamp(2rem, 1.6rem + 2vw, 3rem)`
+- **Description**: 2x extra large spacing with fluid scaling
+
+- **Property**: `--ifm-spacing-3xl`
+- **Type**: CSS length
+- **Default**: `clamp(3rem, 2.4rem + 3vw, 4rem)`
+- **Description**: 3x extra large spacing with fluid scaling
+
+### Breakpoint Properties
+- **Property**: `--ifm-breakpoint-xs`
+- **Type**: CSS length
+- **Default**: `0px`
+- **Description**: Extra small breakpoint (mobile first)
+
+- **Property**: `--ifm-breakpoint-sm`
+- **Type**: CSS length
+- **Default**: `576px`
+- **Description**: Small breakpoint
+
+- **Property**: `--ifm-breakpoint-md`
+- **Type**: CSS length
+- **Default**: `768px`
+- **Description**: Medium breakpoint
+
+- **Property**: `--ifm-breakpoint-lg`
+- **Type**: CSS length
+- **Default**: `992px`
+- **Description**: Large breakpoint
+
+- **Property**: `--ifm-breakpoint-xl`
+- **Type**: CSS length
+- **Default**: `1200px`
+- **Description**: Extra large breakpoint
+
+- **Property**: `--ifm-breakpoint-xxl`
+- **Type**: CSS length
+- **Default**: `1400px`
+- **Description**: 2x extra large breakpoint
+
+## CSS Classes API
+
+### Typography Classes
+- **Class**: `.text-fluid`
+- **Description**: Applies fluid typography based on screen size
+- **Properties**: `font-size` using clamp() function
+
+- **Class**: `.text-responsive`
+- **Description**: Responsive text that scales with viewport
+- **Properties**: `font-size`, `line-height` with responsive values
+
+### Color Utility Classes
+- **Class**: `.bg-primary-{level}`
+- **Description**: Background color from primary spectrum (100-900)
+- **Example**: `.bg-primary-600` for primary-600 background
+
+- **Class**: `.text-primary-{level}`
+- **Description**: Text color from primary spectrum (100-900)
+- **Example**: `.text-primary-600` for primary-600 text
+
+- **Class**: `.border-primary-{level}`
+- **Description**: Border color from primary spectrum (100-900)
+- **Example**: `.border-primary-600` for primary-600 border
+
+### Responsive Utility Classes
+- **Class**: `.touch-target`
+- **Description**: Ensures minimum 44px touch target size
+- **Properties**: `min-height: 44px`, `min-width: 44px`
+
+- **Class**: `.interactive-element`
+- **Description**: Enhanced interactive element with states
+- **Properties**: Hover, focus, and active state transitions
+
+## Component-Specific CSS
+
+### Navigation Components
+- **Selector**: `.navbar__item`
+- **Properties**: Minimum 44px touch targets, smooth transitions
+- **Validation**: WCAG AA contrast ratios, keyboard accessibility
+
+### Content Components
+- **Selector**: `.markdown`
+- **Properties**: Responsive typography, proper line heights
+- **Validation**: Readable text scaling, proper spacing
+
+### Card Components
+- **Selector**: `.card`
+- **Properties**: Hover animations, consistent shadows
+- **Validation**: Smooth transitions, proper contrast
+
+## Validation Requirements
+
+### Accessibility Compliance
+- All text must maintain WCAG 2.1 AA contrast ratios
+- All interactive elements must meet 44px minimum touch target
+- Focus states must be clearly visible
+- Color information must not be conveyed by color alone
+
+### Performance Requirements
+- CSS file must be under 50KB when gzipped
+- Custom properties must be efficiently used
+- No redundant or unused CSS rules
+
+### Responsive Requirements
+- Typography must scale smoothly across all breakpoints
+- Layouts must adapt to all defined breakpoints
+- Elements must maintain readability at 200% zoom
+
+## Browser Support
+- Chrome 79+
+- Firefox 75+
+- Safari 13.1+
+- Edge 79+
+- All browsers supporting CSS custom properties and clamp() function

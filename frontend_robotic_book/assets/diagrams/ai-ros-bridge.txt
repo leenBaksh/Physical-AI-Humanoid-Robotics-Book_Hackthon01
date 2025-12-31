@@ -1,0 +1,61 @@
+# AI-ROS Bridge Diagram
+
+## Architecture Overview
+
+```
+[Sensor Data] --> [Sensor Processor] --> [Processed Data Topic]
+                       |
+                       v
+[AI Decision Maker] <--+--> [AI Agent Node] --> [Robot Command Topic]
+     |                                    |
+     v                                    v
+[AI Model]                         [Robot Controller]
+```
+
+## Data Flow
+
+1. **Raw Sensor Data**: Physical sensors produce raw data
+2. **Sensor Processing**: Raw data is cleaned and formatted
+3. **AI Decision Making**: Processed data is analyzed by AI algorithms
+4. **Command Generation**: AI decisions are converted to robot commands
+5. **Robot Execution**: Commands are executed by robot control systems
+
+## Communication Patterns
+
+### Sensor to AI Agent
+- **Pattern**: Publisher-Subscriber
+- **Topic**: /sensor_data
+- **Message Type**: std_msgs/String (or custom sensor messages)
+- **QoS**: Reliable, Best Effort (depending on sensor type)
+
+### AI Agent to Robot
+- **Pattern**: Publisher-Subscriber
+- **Topic**: /robot_commands
+- **Message Type**: geometry_msgs/Twist (or custom command messages)
+- **QoS**: Reliable, Volatile
+
+### Feedback Loop
+- **Pattern**: Publisher-Subscriber or Service
+- **Topic/Service**: /robot_status or get_robot_status
+- **Message Type**: Custom status messages
+- **QoS**: Reliable, Volatile
+
+## Node Responsibilities
+
+### AI Agent Node
+- Subscribes to sensor data topics
+- Runs AI decision-making algorithms
+- Publishes robot command topics
+- Manages AI model inference
+
+### Sensor Processor Node
+- Subscribes to raw sensor topics
+- Processes and validates sensor data
+- Publishes clean sensor data topics
+- Handles sensor-specific formatting
+
+### Robot Controller Node
+- Subscribes to command topics
+- Translates commands to hardware actions
+- Provides status feedback
+- Ensures safety constraints

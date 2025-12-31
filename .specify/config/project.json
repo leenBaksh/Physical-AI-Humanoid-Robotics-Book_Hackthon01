@@ -1,0 +1,11 @@
+{
+  "name": "Physical-AI-Humanoid-Robotics",
+  "version": "1.0.0",
+  "description": "Spec-Kit project configuration for Physical AI Humanoid Robotics project",
+  "specKit": {
+    "version": "1.0",
+    "templatesDir": "./templates",
+    "scriptsDir": "./scripts",
+    "configDir": "./config"
+  }
+}

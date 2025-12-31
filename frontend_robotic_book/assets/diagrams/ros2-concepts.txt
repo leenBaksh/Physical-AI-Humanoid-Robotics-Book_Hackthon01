@@ -1,0 +1,49 @@
+# ROS 2 Concepts Diagram
+
+## Node Communication Structure
+
+```
+[Publisher Node]  ------> (Topic) ------> [Subscriber Node]
+      |                                      |
+   Publish                               Receive
+   Messages                              Messages
+
+[Service Client]  <---> (Service) <----> [Service Server]
+      |                Request/           |
+      |                Response           |
+   Send Request                      Send Response
+```
+
+## Publisher-Subscriber Pattern
+
+Publisher Node:
+- Creates publisher object
+- Publishes messages to topic
+- Unaware of subscribers
+
+Topic:
+- Named communication bus
+- Routes messages between nodes
+- Supports multiple publishers/subscribers
+
+Subscriber Node:
+- Creates subscription object
+- Receives messages from topic
+- Unaware of publishers
+
+## Service Pattern
+
+Service Client:
+- Sends request to service
+- Waits for response
+- One-to-one communication
+
+Service:
+- Receives requests
+- Processes and responds
+- Synchronous communication
+
+Service Server:
+- Provides service functionality
+- Responds to requests
+- Handles synchronous communication

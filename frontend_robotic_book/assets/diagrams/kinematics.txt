@@ -1,0 +1,141 @@
+# Kinematics Visualization
+
+## Forward Kinematics Example
+
+```
+Base Frame (0,0,0)
+    |
+    | Joint 1 (θ1)
+    |
+   Link 1 (L1)
+    |
+    | Joint 2 (θ2)
+    |
+   Link 2 (L2)
+    |
+    | Joint 3 (θ3)
+    |
+   End Effector Position (x,y,z)
+```
+
+### Forward Kinematics Formula
+```
+T_total = T_base * T_1(θ1) * T_2(θ2) * T_3(θ3)
+
+Where T_i(θi) is the transformation matrix for joint i
+```
+
+## Inverse Kinematics Example
+
+```
+Desired Position (x_d, y_d, z_d)
+         |
+         v
+[IK Solver Algorithm]
+         |
+         v
+Joint Angles (θ1, θ2, θ3)
+```
+
+## Kinematic Chain Representation
+
+### Serial Chain (Open)
+```
+Base -> Joint1 -> Link1 -> Joint2 -> Link2 -> Joint3 -> End Effector
+```
+
+### Tree Structure (Multiple End Effectors)
+```
+                    Base
+                   /    \
+              Joint1    Joint4
+             /           \
+         Link1         Link4
+         /               \
+      Joint2           Joint5
+      /                   \
+   Link2               Link5
+   /                       \
+End Effector1          End Effector2
+```
+
+## DOF Analysis
+
+### Humanoid Robot DOF Distribution
+```
+Torso: 0 DOF (if floating base is considered separately)
+Head: 3 DOF (neck joints)
+Arms: 7 DOF each (shoulder: 3, elbow: 1, wrist: 3)
+Legs: 6 DOF each (hip: 3, knee: 1, ankle: 2)
+Total: ~29 DOF (excluding fingers)
+```
+
+## Joint Types and Notation
+
+### Joint Symbols
+- R = Revolute (rotational)
+- P = Prismatic (linear)
+- F = Fixed (no movement)
+- S = Spherical (3 DOF rotation)
+- C = Cylindrical (rotation + translation)
+
+### Common Joint Configurations
+```
+RRR - 3 revolute joints (e.g., shoulder)
+RPR - Revolute-Prismatic-Revolute (e.g., some robot wrists)
+S - Spherical joint (3 DOF ball joint)
+```
+
+## Coordinate Systems
+
+### Right-Hand Rule
+```
+    Z (up)
+    |
+    |
+    |_______ Y (away)
+   /
+  /
+ X (right)
+```
+
+### Joint Axis Convention
+- Z-axis: Joint rotation/translation axis
+- X-axis: Common normal between previous and current joint axes
+- Y-axis: Completes right-handed coordinate system
+
+## Workspace Visualization
+
+### 2D Workspace Example
+```
+     Y
+     ^
+     |    reachable area
+     |      #######
+     |    ###     ###
+     |  ###         ###
+     |###             ###
+    0|###################> X
+     reachable area
+```
+
+### 3D Workspace
+- Volume in 3D space that end-effector can reach
+- Depends on link lengths and joint limits
+- May have internal unreachable volumes
+
+## Jacobian Matrix Concept
+
+The Jacobian relates joint velocities to end-effector velocities:
+
+```
+[v]   [J_trans] [θ_dot]
+[ ] = [       ] [     ]
+[ω]   [J_rot  ] [θ_dot]
+```
+
+Where:
+- v = end-effector linear velocity
+- ω = end-effector angular velocity
+- θ_dot = joint velocities
+- J = Jacobian matrix

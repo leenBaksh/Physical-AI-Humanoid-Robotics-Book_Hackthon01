@@ -1,0 +1,631 @@
+/**
+ * SYNTHWAVE SUNSET MODULE
+ * 80s retro aesthetic with gradient skies
+ * Responsive sunset backgrounds for all screens
+ * cSpell:ignore SYNTHWAVE
+ */
+
+:root {
+  --fluid-min: 320px;
+  --fluid-max: 1600px;
+  --fluid-range: calc(var(--fluid-max) - var(--fluid-min));
+}
+
+.heroBanner {
+  padding: 6rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    to bottom,
+    #0c0e2a 0%,
+    #1a0b2e 25%,
+    #2d0b3a 50%,
+    #4a0b4a 75%,
+    #ff00ff 100%
+  );
+  color: #ffcc00;
+  isolation: isolate;
+  min-height: 80vh;
+}
+
+/* Fluid typography for hero title */
+.heroBanner .hero__title {
+  font-size: clamp(2.2rem, 4vw + 1rem, 6rem);
+  margin-bottom: 1rem;
+}
+
+/* Fluid typography for hero subtitle */
+.heroBanner .hero__subtitle {
+  font-size: clamp(1.2rem, 2vw + 0.6rem, 2rem);
+  margin-bottom: 2rem;
+}
+
+/* Sunset gradient animation */
+@keyframes sunsetPulse {
+  0%, 100% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    background-position: 100% 50%;
+    filter: hue-rotate(10deg);
+  }
+}
+
+.heroBanner {
+  animation: sunsetPulse 30s ease infinite;
+  background-size: 200% 200%;
+}
+
+/* Grid sun rays */
+.heroBanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 204, 0, 0.1) 2px,
+      rgba(255, 204, 0, 0.1) 4px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255, 0, 255, 0.1) 2px,
+      rgba(255, 0, 255, 0.1) 4px
+    );
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* Floating grid */
+.heroBanner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(255, 204, 0, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 10% 90%, rgba(255, 0, 255, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 90% 90%, rgba(0, 204, 255, 0.2) 0%, transparent 50%);
+  animation: floatGrid 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes floatGrid {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-20px) scale(1.05); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+/* ========== MEDIA SCREEN BACKGROUNDS ========== */
+
+/* Ultra-wide cinematic */
+@media screen and (min-width: 2560px) and (min-aspect-ratio: 21/9) {
+  .heroBanner {
+    background: linear-gradient(
+      135deg,
+      #0c0e2a 0%,
+      #1a0b2e 20%,
+      #2d0b3a 40%,
+      #4a0b4a 60%,
+      #ff00ff 80%,
+      #ffcc00 100%
+    );
+    animation: sunsetPulseWide 40s ease infinite;
+  }
+  
+  @keyframes sunsetPulseWide {
+    0%, 100% {
+      background-position: 0% 0%;
+      filter: hue-rotate(0deg);
+    }
+    33% {
+      background-position: 100% 50%;
+      filter: hue-rotate(15deg);
+    }
+    66% {
+      background-position: 50% 100%;
+      filter: hue-rotate(-15deg);
+    }
+  }
+  
+  .heroBanner::before {
+    background: 
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 4px,
+        rgba(255, 204, 0, 0.15) 4px,
+        rgba(255, 204, 0, 0.15) 8px
+      );
+  }
+}
+
+/* 4K Displays */
+@media screen and (min-width: 3840px) {
+  .heroBanner {
+    padding: 12rem 0;
+    background-size: 300% 300%;
+  }
+}
+
+/* Desktop HD */
+@media screen and (min-width: 1440px) and (max-width: 2559px) {
+  .heroBanner {
+    background: linear-gradient(
+      45deg,
+      #0c0e2a 0%,
+      #1a0b2e 33%,
+      #2d0b3a 66%,
+      #ff00ff 100%
+    );
+  }
+  
+  .heroBanner::before {
+    opacity: 0.7;
+  }
+}
+
+/* LG tier (992-1199px): Royal gradient (purples/violets) */
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+  .heroBanner {
+    background: linear-gradient(
+      110deg,
+      #0c0e2a 0%,      /* Deep purple base */
+      #7e22ce 25%,     /* Royal purple */
+      #a855f7 50%,     /* Violet */
+      #c084fc 75%,     /* Light purple */
+      #e879f9 100%     /* Royal pink */
+    );
+    animation: sunsetPulse 28s ease infinite;
+  }
+
+  .heroBanner::before {
+    background:
+      repeating-linear-gradient(
+        70deg,
+        transparent,
+        transparent 2px,
+        rgba(232, 121, 249, 0.1) 2px,  /* Royal pink glow */
+        rgba(232, 121, 249, 0.1) 4px
+      ),
+      repeating-linear-gradient(
+        -70deg,
+        transparent,
+        transparent 2px,
+        rgba(168, 85, 247, 0.1) 2px,   /* Violet glow */
+        rgba(168, 85, 247, 0.1) 4px
+      );
+  }
+}
+
+/* MD tier (768-991px): Deep sea gradient (navy/teal) */
+@media screen and (min-width: 768px) and (max-width: 991px) {
+  .heroBanner {
+    background: linear-gradient(
+      100deg,
+      #0c0e2a 0%,      /* Deep sea blue */
+      #1e3a8a 25%,     /* Navy blue */
+      #0f766e 50%,     /* Deep teal */
+      #14b8a6 75%,     /* Teal */
+      #06b6d4 100%     /* Sea blue */
+    );
+    animation: sunsetPulse 25s ease infinite;
+  }
+
+  .heroBanner::before {
+    background:
+      repeating-linear-gradient(
+        80deg,
+        transparent,
+        transparent 2px,
+        rgba(6, 182, 212, 0.1) 2px,   /* Sea blue glow */
+        rgba(6, 182, 212, 0.1) 4px
+      ),
+      repeating-linear-gradient(
+        -80deg,
+        transparent,
+        transparent 2px,
+        rgba(20, 184, 166, 0.1) 2px,  /* Teal glow */
+        rgba(20, 184, 166, 0.1) 4px
+      );
+  }
+}
+
+/* Tablet landscape */
+@media screen and (min-width: 768px) and (max-width: 991px) and (orientation: landscape) {
+  .heroBanner {
+    padding: 4rem 0;
+    background: linear-gradient(
+      to right,
+      #0c0e2a 0%,
+      #1a0b2e 25%,
+      #2d0b3a 50%,
+      #4a0b4a 75%,
+      #ff00ff 100%
+    );
+    animation: sunsetPulse 25s ease infinite;
+  }
+  
+  .heroBanner::after {
+    animation: floatGrid 15s linear infinite;
+  }
+}
+
+/* Tablet portrait */
+@media screen and (min-width: 768px) and (max-width: 991px) and (orientation: portrait) {
+  .heroBanner {
+    padding: 5rem 0;
+    min-height: 70vh;
+  }
+  
+  .heroBanner::before {
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(255, 204, 0, 0.2) 3px,
+        rgba(255, 204, 0, 0.2) 6px
+      );
+  }
+}
+
+/* SM tier (576-767px): Forest gradient (greens) */
+@media screen and (min-width: 576px) and (max-width: 767px) {
+  .heroBanner {
+    background: linear-gradient(
+      90deg,
+      #0c0e2a 0%,      /* Deep forest base */
+      #166534 25%,     /* Forest green */
+      #22c55e 50%,     /* Green */
+      #86efac 75%,     /* Light green */
+      #bbf7d0 100%     /* Forest highlight */
+    );
+    animation: sunsetPulse 22s ease infinite;
+  }
+
+  .heroBanner::before {
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 2px,
+        rgba(134, 239, 172, 0.1) 2px,  /* Light green glow */
+        rgba(134, 239, 172, 0.1) 4px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 2px,
+        rgba(34, 197, 94, 0.1) 2px,    /* Green glow */
+        rgba(34, 197, 94, 0.1) 4px
+      );
+  }
+}
+
+/* Mobile landscape */
+@media screen and (max-width: 767px) and (orientation: landscape) {
+  .heroBanner {
+    padding: 2rem 0;
+    min-height: 60vh;
+    background: linear-gradient(
+      180deg,
+      #0c0e2a 0%,
+      #2d0b3a 50%,
+      #ff00ff 100%
+    );
+    animation: sunsetPulseMobile 20s ease infinite;
+  }
+
+  @keyframes sunsetPulseMobile {
+    0%, 100% {
+      background-position: 50% 0%;
+    }
+    50% {
+      background-position: 50% 100%;
+    }
+  }
+
+  .heroBanner::before,
+  .heroBanner::after {
+    opacity: 0.3;
+  }
+
+  /* Touch-optimized styles */
+  .buttons {
+    gap: 2rem; /* Increased spacing */
+  }
+
+  .button {
+    min-height: 44px; /* Minimum touch target height */
+    min-width: 44px; /* Minimum touch target width */
+    padding: 1rem 1.5rem; /* Increased padding */
+    font-size: 1.1rem; /* Larger text for better readability */
+  }
+}
+
+/* XS tier (480-575px): Magenta gradient (purples/pinks) */
+@media screen and (min-width: 480px) and (max-width: 575px) {
+  .heroBanner {
+    background: linear-gradient(
+      80deg,
+      #0c0e2a 0%,      /* Deep base */
+      #7e22ce 25%,     /* Purple */
+      #c026d3 50%,     /* Magenta */
+      #e879f9 75%,     /* Pink */
+      #f0abfc 100%     /* Light pink */
+    );
+    animation: sunsetPulse 20s ease infinite;
+  }
+
+  .heroBanner::before {
+    background:
+      repeating-linear-gradient(
+        30deg,
+        transparent,
+        transparent 2px,
+        rgba(240, 171, 252, 0.1) 2px,  /* Light pink glow */
+        rgba(240, 171, 252, 0.1) 4px
+      ),
+      repeating-linear-gradient(
+        -30deg,
+        transparent,
+        transparent 2px,
+        rgba(232, 121, 249, 0.1) 2px,  /* Pink glow */
+        rgba(232, 121, 249, 0.1) 4px
+      );
+  }
+}
+
+/* Mobile portrait */
+@media screen and (max-width: 767px) and (orientation: portrait) {
+  .heroBanner {
+    padding: 4rem 2rem;
+    background: linear-gradient(
+      to bottom,
+      #0c0e2a 0%,
+      #1a0b2e 30%,
+      #4a0b4a 70%,
+      #ff00ff 100%
+    );
+  }
+
+  .heroBanner::before {
+    display: none;
+  }
+
+  .heroBanner::after {
+    background-image:
+      radial-gradient(circle at 50% 20%, rgba(255, 204, 0, 0.3) 0%, transparent 60%);
+  }
+
+  /* Touch-optimized styles */
+  .buttons {
+    gap: 2rem; /* Increased spacing */
+  }
+
+  .button {
+    min-height: 44px; /* Minimum touch target height */
+    min-width: 44px; /* Minimum touch target width */
+    padding: 1rem 1.5rem; /* Increased padding */
+    font-size: 1.1rem; /* Larger text for better readability */
+  }
+}
+
+/* XXS tier (<479px): Crimson gradient (reds/pinks) */
+@media screen and (max-width: 479px) {
+  .heroBanner {
+    background: linear-gradient(
+      70deg,
+      #0c0e2a 0%,      /* Deep base */
+      #dc2626 25%,     /* Crimson red */
+      #f43f5e 50%,     /* Rose red */
+      #fb7185 75%,     /* Salmon pink */
+      #fda4af 100%     /* Light pink */
+    );
+    animation: sunsetPulse 18s ease infinite;
+  }
+
+  .heroBanner::before {
+    background:
+      repeating-linear-gradient(
+        20deg,
+        transparent,
+        transparent 1px,
+        rgba(253, 164, 175, 0.1) 1px,  /* Light pink glow */
+        rgba(253, 164, 175, 0.1) 2px
+      ),
+      repeating-linear-gradient(
+        -20deg,
+        transparent,
+        transparent 1px,
+        rgba(244, 63, 94, 0.1) 1px,    /* Rose red glow */
+        rgba(244, 63, 94, 0.1) 2px
+      );
+  }
+}
+
+/* Small mobile devices */
+@media screen and (max-width: 375px) {
+  .heroBanner {
+    padding: 3rem 1rem;
+    animation: sunsetPulse 40s ease infinite;
+  }
+}
+
+/* XXL tier (1600px+): Deep space gradient (purples/blues) */
+@media screen and (min-width: 1600px) {
+  .heroBanner {
+    background: linear-gradient(
+      135deg,
+      #0c0e2a 0%,      /* Deep space purple */
+      #1a0b2e 25%,     /* Cosmic blue */
+      #2d0b3a 50%,     /* Nebula purple */
+      #1e3a8a 75%,     /* Deep blue */
+      #3b82f6 100%     /* Sky blue */
+    );
+    animation: sunsetPulse 35s ease infinite;
+  }
+
+  .heroBanner::before {
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 3px,
+        rgba(124, 58, 237, 0.15) 3px,  /* Purple glow */
+        rgba(124, 58, 237, 0.15) 6px
+      ),
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 3px,
+        rgba(59, 130, 246, 0.15) 3px,  /* Blue glow */
+        rgba(59, 130, 246, 0.15) 6px
+      );
+  }
+}
+
+/* XL tier (1200-1599px): Ocean depth gradient (blues/teals) */
+@media screen and (min-width: 1200px) and (max-width: 1599px) {
+  .heroBanner {
+    background: linear-gradient(
+      120deg,
+      #0c0e2a 0%,      /* Deep ocean blue */
+      #1e40af 25%,     /* Ocean blue */
+      #0ea5e9 50%,     /* Sky blue */
+      #14b8a6 75%,     /* Teal */
+      #06b6d4 100%     /* Turquoise */
+    );
+    animation: sunsetPulse 30s ease infinite;
+  }
+
+  .heroBanner::before {
+    background:
+      repeating-linear-gradient(
+        60deg,
+        transparent,
+        transparent 2px,
+        rgba(6, 182, 212, 0.12) 2px,  /* Turquoise glow */
+        rgba(6, 182, 212, 0.12) 4px
+      ),
+      repeating-linear-gradient(
+        -60deg,
+        transparent,
+        transparent 2px,
+        rgba(20, 184, 166, 0.12) 2px,  /* Teal glow */
+        rgba(20, 184, 166, 0.12) 4px
+      );
+  }
+}
+
+/* Foldable and very short screens */
+@media screen and (max-width: 767px) and (max-height: 400px) {
+  .heroBanner {
+    padding: 3rem 0;
+    min-height: 100svh;
+    background: linear-gradient(
+      135deg,
+      #0c0e2a 0%,
+      #ff00ff 100%
+    );
+    animation: none;
+  }
+
+  .heroBanner::before {
+    opacity: 0.2;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .heroBanner,
+  .heroBanner::after {
+    animation: none;
+  }
+  
+  .heroBanner {
+    background: linear-gradient(
+      to bottom,
+      #491726 0%,
+      #4a0b4a 100%,
+      #ff00ff 100%
+    );
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .heroBanner {
+    background: linear-gradient(
+      to bottom,
+      #000000 0%,
+      #660066 50%,
+      #ff00ff 100%
+    );
+    color: #ffff00;
+  }
+  
+  .heroBanner::before {
+    opacity: 0.8;
+  }
+}
+
+/* Dark mode optimization */
+@media (prefers-color-scheme: dark) {
+  .heroBanner {
+    filter: brightness(0.9);
+  }
+}
+
+/* Print styles */
+@media print {
+  .heroBanner {
+    background: white;
+    color: black;
+    animation: none;
+    min-height: 0;
+    padding: 2rem 0;
+  }
+
+  .heroBanner::before,
+  .heroBanner::after {
+    display: none;
+  }
+
+  .heroBanner .hero__title {
+    color: black;
+    font-size: 2rem;
+  }
+
+  .heroBanner .hero__subtitle {
+    color: #666;
+    font-size: 1.2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 4rem 2rem;
+  }
+  
+  .buttons {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

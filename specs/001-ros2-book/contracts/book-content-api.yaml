@@ -1,0 +1,90 @@
+# API Contract: Book Content Query Interface
+
+## Purpose
+This API contract defines the interface for querying book content, which would be used by the embedded RAG chatbot to answer questions based on the book content.
+
+## Endpoints
+
+### GET /api/content/search
+Search for content within the book based on a query.
+
+**Request**:
+```
+GET /api/content/search?q={query}
+```
+
+**Parameters**:
+- q (string, required): Search query string
+
+**Response**:
+```
+{
+  "results": [
+    {
+      "id": "string",
+      "title": "string",
+      "content": "string",
+      "url": "string",
+      "score": "number"
+    }
+  ],
+  "total": "number"
+}
+```
+
+### GET /api/content/chapter/{chapterId}
+Retrieve content for a specific chapter.
+
+**Request**:
+```
+GET /api/content/chapter/{chapterId}
+```
+
+**Parameters**:
+- chapterId (string, required): ID of the chapter
+
+**Response**:
+```
+{
+  "id": "string",
+  "title": "string",
+  "content": "string",
+  "sections": [
+    {
+      "id": "string",
+      "title": "string",
+      "content": "string"
+    }
+  ]
+}
+```
+
+### POST /api/chat/query
+Process a user query against the book content and return a response.
+
+**Request**:
+```
+POST /api/chat/query
+Content-Type: application/json
+
+{
+  "query": "string",
+  "context": "string" (optional - selected text from the page),
+  "userId": "string" (optional)
+}
+```
+
+**Response**:
+```
+{
+  "response": "string",
+  "sources": [
+    {
+      "id": "string",
+      "title": "string",
+      "url": "string"
+    }
+  ],
+  "confidence": "number" (0-1)
+}
+```

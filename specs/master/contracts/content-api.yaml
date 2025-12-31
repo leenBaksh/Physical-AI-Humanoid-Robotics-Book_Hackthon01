@@ -1,0 +1,297 @@
+openapi: 3.0.0
+info:
+  title: Content Management API
+  description: API for managing book content and its synchronization with the RAG system
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+  - url: https://api.example.com
+    description: Production server
+
+paths:
+  /api/content/modules:
+    get:
+      summary: List all book modules
+      responses:
+        '200':
+          description: List of all book modules
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Module'
+
+  /api/content/modules/{module_id}:
+    get:
+      summary: Get details of a specific module
+      parameters:
+        - name: module_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Module details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Module'
+        '404':
+          description: Module not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/content/modules/{module_id}/chapters:
+    get:
+      summary: List all chapters in a module
+      parameters:
+        - name: module_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of chapters in the module
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Chapter'
+
+  /api/content/chapters/{chapter_id}:
+    get:
+      summary: Get details of a specific chapter
+      parameters:
+        - name: chapter_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Chapter details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Chapter'
+        '404':
+          description: Chapter not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/content/search:
+    get:
+      summary: Search across all book content
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+          description: Search query
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 10
+          description: Maximum number of results to return
+        - name: module
+          in: query
+          schema:
+            type: string
+          description: Filter by specific module
+      responses:
+        '200':
+          description: Search results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SearchResult'
+                  total:
+                    type: integer
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/content/updates:
+    post:
+      summary: Notify the system of content updates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - file_path
+                - change_type
+              properties:
+                file_path:
+                  type: string
+                  description: Path to the updated file
+                  example: "docs/module1/chapter-1-ros2-core/content.md"
+                change_type:
+                  type: string
+                  enum: [create, update, delete]
+                  description: Type of change
+                trigger_reindex:
+                  type: boolean
+                  default: true
+                  description: Whether to trigger reindexing after the update
+      responses:
+        '200':
+          description: Update processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "processed"
+                  reindex_triggered:
+                    type: boolean
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Module:
+      type: object
+      required:
+        - id
+        - name
+        - description
+        - chapters
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the module
+          example: "module1"
+        name:
+          type: string
+          description: Display name of the module
+          example: "Module 1: ROS 2 Fundamentals"
+        description:
+          type: string
+          description: Brief description of the module
+          example: "Introduction to ROS 2 fundamentals for humanoid robotics"
+        chapters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chapter'
+        prerequisites:
+          type: array
+          items:
+            type: string
+          description: Prerequisites for this module
+        learning_outcomes:
+          type: array
+          items:
+            type: string
+          description: Learning outcomes for this module
+
+    Chapter:
+      type: object
+      required:
+        - id
+        - title
+        - description
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the chapter
+          example: "module1-chapter1"
+        title:
+          type: string
+          description: Title of the chapter
+          example: "ROS 2 Core – Nodes, Topics, & Services"
+        description:
+          type: string
+          description: Brief description of the chapter
+          example: "Understanding the core concepts of ROS 2"
+        sections:
+          type: array
+          items:
+            type: string
+          description: List of section titles in the chapter
+        file_path:
+          type: string
+          description: Path to the chapter content file
+          example: "docs/module1/chapter-1-ros2-core/content.md"
+        prerequisites:
+          type: array
+          items:
+            type: string
+          description: Prerequisites for this chapter
+        learning_objectives:
+          type: array
+          items:
+            type: string
+          description: Learning objectives for this chapter
+
+    SearchResult:
+      type: object
+      required:
+        - id
+        - title
+        - content
+        - source
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the search result
+        title:
+          type: string
+          description: Title of the content section
+        content:
+          type: string
+          description: Snippet of the content
+        source:
+          type: string
+          description: Source file of the content
+          example: "docs/module1/chapter-1-ros2-core/content.md"
+        module:
+          type: string
+          description: Module the content belongs to
+        chapter:
+          type: string
+          description: Chapter the content belongs to
+        score:
+          type: number
+          format: float
+          description: Relevance score of the result
+
+    Error:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          example: "error_code"
+        message:
+          type: string
+          example: "Descriptive error message"

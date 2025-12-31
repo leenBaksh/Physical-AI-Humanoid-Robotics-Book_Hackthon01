@@ -1,0 +1,21 @@
+<svg width="200" height="40" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" fill-rule="evenodd">
+    <!-- Robot Icon -->
+    <g transform="translate(8, 8)">
+      <rect x="0" y="0" width="24" height="24" rx="4" fill="#f87171"/>
+      <circle cx="6" cy="8" r="1.5" fill="#1f2937"/>
+      <circle cx="18" cy="8" r="1.5" fill="#1f2937"/>
+      <rect x="8" y="14" width="8" height="2" rx="1" fill="#1f2937"/>
+      <rect x="4" y="4" width="2" height="2" rx="1" fill="#1f2937"/>
+      <rect x="18" y="4" width="2" height="2" rx="1" fill="#1f2937"/>
+    </g>
+
+    <!-- Text -->
+    <text x="40" y="18" font-family="Arial, sans-serif" font-size="14" fill="#f9fafb" font-weight="bold">
+      Physical AI
+    </text>
+    <text x="40" y="32" font-family="Arial, sans-serif" font-size="10" fill="#d1d5db">
+      Humanoid Robotics Book
+    </text>
+  </g>
+</svg>

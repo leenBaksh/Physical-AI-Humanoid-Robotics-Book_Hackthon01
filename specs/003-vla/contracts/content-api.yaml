@@ -1,0 +1,282 @@
+# API Contract: Documentation Content Management
+
+## Overview
+This API contract defines the interface for managing documentation content in the frontend_robotic_book Docusaurus project.
+
+## Base URL
+```
+https://api.frontend-robotic-book.com/v1
+```
+
+## Authentication
+All API requests require a Bearer token in the Authorization header:
+```
+Authorization: Bearer {token}
+```
+
+## Endpoints
+
+### 1. Get Module List
+**GET** `/modules`
+
+#### Description
+Retrieve a list of all documentation modules with basic information.
+
+#### Request
+```
+GET /modules
+Authorization: Bearer {token}
+```
+
+#### Response
+```json
+{
+  "modules": [
+    {
+      "id": "module1",
+      "title": "ROS 2 Fundamentals",
+      "description": "Introduction to ROS 2 concepts and architecture",
+      "order": 1,
+      "chapter_count": 3,
+      "created_at": "2025-01-15T10:30:00Z",
+      "updated_at": "2025-01-20T14:45:00Z"
+    }
+  ]
+}
+```
+
+#### Error Responses
+- `401 Unauthorized`: Invalid or missing authentication token
+- `500 Internal Server Error`: Server error processing request
+
+### 2. Get Module Details
+**GET** `/modules/{moduleId}`
+
+#### Description
+Retrieve detailed information about a specific module including chapters.
+
+#### Path Parameters
+- `moduleId`: Unique identifier for the module
+
+#### Request
+```
+GET /modules/module1
+Authorization: Bearer {token}
+```
+
+#### Response
+```json
+{
+  "id": "module1",
+  "title": "ROS 2 Fundamentals",
+  "description": "Introduction to ROS 2 concepts and architecture",
+  "order": 1,
+  "chapters": [
+    {
+      "id": "chapter1",
+      "title": "Introduction to ROS 2",
+      "content_preview": "This chapter covers the basics of ROS 2...",
+      "order": 1,
+      "word_count": 1250,
+      "estimated_reading_time": 5
+    }
+  ],
+  "created_at": "2025-01-15T10:30:00Z",
+  "updated_at": "2025-01-20T14:45:00Z"
+}
+```
+
+#### Error Responses
+- `401 Unauthorized`: Invalid or missing authentication token
+- `404 Not Found`: Module with given ID does not exist
+- `500 Internal Server Error`: Server error processing request
+
+### 3. Get Chapter Content
+**GET** `/modules/{moduleId}/chapters/{chapterId}`
+
+#### Description
+Retrieve the full content of a specific chapter.
+
+#### Path Parameters
+- `moduleId`: Unique identifier for the module
+- `chapterId`: Unique identifier for the chapter
+
+#### Request
+```
+GET /modules/module1/chapters/chapter1
+Authorization: Bearer {token}
+```
+
+#### Response
+```json
+{
+  "id": "chapter1",
+  "title": "Introduction to ROS 2",
+  "module_id": "module1",
+  "content": "# Introduction to ROS 2\n\nROS 2 (Robot Operating System 2) is a flexible framework for writing robot applications...",
+  "order": 1,
+  "word_count": 1250,
+  "estimated_reading_time": 5,
+  "assets": [
+    {
+      "id": "img1",
+      "filename": "ros2-architecture.png",
+      "url": "/img/ros2-architecture.png",
+      "alt_text": "ROS 2 architecture diagram showing nodes, topics, and services"
+    }
+  ],
+  "created_at": "2025-01-16T09:15:00Z",
+  "updated_at": "2025-01-18T11:30:00Z"
+}
+```
+
+#### Error Responses
+- `401 Unauthorized`: Invalid or missing authentication token
+- `404 Not Found`: Module or chapter with given IDs do not exist
+- `500 Internal Server Error`: Server error processing request
+
+### 4. Update Chapter Content
+**PUT** `/modules/{moduleId}/chapters/{chapterId}`
+
+#### Description
+Update the content of a specific chapter.
+
+#### Path Parameters
+- `moduleId`: Unique identifier for the module
+- `chapterId`: Unique identifier for the chapter
+
+#### Request Body
+```json
+{
+  "title": "Introduction to ROS 2",
+  "content": "# Introduction to ROS 2\n\nROS 2 (Robot Operating System 2) is a flexible framework for writing robot applications...",
+  "assets": [
+    {
+      "id": "img1",
+      "filename": "ros2-architecture.png",
+      "alt_text": "ROS 2 architecture diagram showing nodes, topics, and services"
+    }
+  ]
+}
+```
+
+#### Request
+```
+PUT /modules/module1/chapters/chapter1
+Authorization: Bearer {token}
+Content-Type: application/json
+
+{
+  "title": "Introduction to ROS 2",
+  "content": "# Introduction to ROS 2\n\nROS 2 (Robot Operating System 2) is a flexible framework for writing robot applications...",
+  "assets": [
+    {
+      "id": "img1",
+      "filename": "ros2-architecture.png",
+      "alt_text": "ROS 2 architecture diagram showing nodes, topics, and services"
+    }
+  ]
+}
+```
+
+#### Response
+```json
+{
+  "id": "chapter1",
+  "title": "Introduction to ROS 2",
+  "module_id": "module1",
+  "content": "# Introduction to ROS 2\n\nROS 2 (Robot Operating System 2) is a flexible framework for writing robot applications...",
+  "order": 1,
+  "word_count": 1250,
+  "estimated_reading_time": 5,
+  "assets": [
+    {
+      "id": "img1",
+      "filename": "ros2-architecture.png",
+      "url": "/img/ros2-architecture.png",
+      "alt_text": "ROS 2 architecture diagram showing nodes, topics, and services"
+    }
+  ],
+  "created_at": "2025-01-16T09:15:00Z",
+  "updated_at": "2025-01-21T16:45:00Z"
+}
+```
+
+#### Error Responses
+- `400 Bad Request`: Invalid request body format
+- `401 Unauthorized`: Invalid or missing authentication token
+- `404 Not Found`: Module or chapter with given IDs do not exist
+- `422 Unprocessable Entity`: Content validation failed
+- `500 Internal Server Error`: Server error processing request
+
+### 5. Search Documentation
+**GET** `/search`
+
+#### Description
+Search across all documentation content with query parameters.
+
+#### Query Parameters
+- `q` (required): Search query string
+- `limit` (optional): Maximum number of results (default: 10, max: 50)
+- `offset` (optional): Number of results to skip (default: 0)
+- `module` (optional): Filter by specific module ID
+
+#### Request
+```
+GET /search?q=ros2+navigation&limit=5
+Authorization: Bearer {token}
+```
+
+#### Response
+```json
+{
+  "query": "ros2 navigation",
+  "total_results": 12,
+  "results": [
+    {
+      "id": "chapter45",
+      "title": "Navigation with ROS 2",
+      "module_id": "module3",
+      "module_title": "Navigation Systems",
+      "preview": "This chapter covers navigation in ROS 2, including path planning, obstacle avoidance, and localization...",
+      "relevance_score": 0.95,
+      "url": "/docs/module3/chapter45"
+    }
+  ],
+  "limit": 5,
+  "offset": 0
+}
+```
+
+#### Error Responses
+- `400 Bad Request`: Missing required query parameter or invalid values
+- `401 Unauthorized`: Invalid or missing authentication token
+- `500 Internal Server Error`: Server error processing request
+
+## Rate Limiting
+All API endpoints are subject to rate limiting:
+- Standard users: 1000 requests per hour
+- Premium users: 5000 requests per hour
+- Admin users: 10000 requests per hour
+
+Rate limit information is included in response headers:
+```
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1642240000
+```
+
+## Error Format
+All error responses follow this format:
+```json
+{
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human-readable error message",
+    "details": "Additional error details if applicable"
+  }
+}
+```
+
+## Versioning
+This API follows semantic versioning. The version is specified in the URL path as `/v1`. Breaking changes will increment the major version number.

@@ -1,0 +1,41 @@
+# API Contracts: Isaac Sim & AI Perception Tools
+
+## Overview
+
+This module focuses on documentation and tutorials for Isaac Sim, VSLAM, and Nav2. As this is primarily educational content, there are no specific API contracts required. The module integrates with existing ROS 2 APIs and Isaac Sim interfaces, which are documented in their respective ecosystems.
+
+## Integration Points
+
+### Isaac Sim API Integration
+- Scene loading and configuration endpoints
+- Synthetic data capture interfaces
+- Camera and sensor simulation controls
+
+### Isaac ROS VSLAM Integration
+- Visual SLAM node configuration
+- Pose graph visualization endpoints
+- Camera feed processing interfaces
+
+### Nav2 Integration
+- Navigation goal publishing
+- Costmap configuration
+- Path planning service interfaces
+
+## ROS 2 Standard Interfaces
+
+### Navigation Actions
+- `nav2_msgs/action/NavigateToPose` - For sending navigation goals
+- `nav_msgs/msg/Path` - For path visualization
+- `geometry_msgs/msg/PoseStamped` - For pose representation
+
+### Isaac ROS Interfaces
+- `isaac_ros_visual_slam_interfaces/msg/` - VSLAM-specific messages
+- Camera interfaces for RGB/depth capture
+- Sensor simulation interfaces
+
+## Documentation APIs
+
+### Docusaurus Content Endpoints
+- Content search API for Isaac Sim topics
+- Tutorial progression tracking
+- Code snippet validation endpoints

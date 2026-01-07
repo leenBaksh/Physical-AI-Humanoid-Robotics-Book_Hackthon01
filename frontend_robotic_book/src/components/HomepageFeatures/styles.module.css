@@ -287,9 +287,9 @@
     rgba(255, 107, 53, 0.1) 100%);
   border: 2px solid var(--ifm-color-primary);
   color: var(--ifm-color-primary);
-  padding: 0.8rem 2rem;
+  padding: 0.5rem 1rem;
   border-radius: 30px;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -658,7 +658,7 @@
   }
   
   .feature-stat__label {
-    font-size: 0.9rem;
+    font-size: 0.5rem;
   }
 }
 

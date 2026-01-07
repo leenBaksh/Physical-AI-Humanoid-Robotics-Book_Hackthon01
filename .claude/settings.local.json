@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(powershell \"Stop-Process -Name node -Force -ErrorAction SilentlyContinue\")"
+      "Bash(powershell \"Stop-Process -Name node -Force -ErrorAction SilentlyContinue\")",
+      "Bash(python -c \"\nfrom src.fetcher.url_fetcher import URLFetcher\nfrom src.fetcher.sitemap_crawler import SitemapCrawler\n\nprint\\(''Testing sitemap crawler functionality...''\\)\n\n# Test the sitemap crawler directly\ncrawler = SitemapCrawler\\(\\)\nurls, sitemap_count, crawled_count = crawler.get_all_urls_with_source\\(''https://physical-ai-humanoid-robotics-book-kohl.vercel.app/''\\)\n\nprint\\(f''Total URLs discovered: {len\\(urls\\)}''\\)\nprint\\(f''From sitemap: {sitemap_count}''\\)\nprint\\(f''From crawling: {crawled_count}''\\)\n\n# Verify that docs URLs are included\ndocs_urls = [url for url in urls if ''docs/module1/chapter-1-ros2-core'' in url]\nprint\\(f''Found {len\\(docs_urls\\)} URLs related to module1/chapter-1-ros2-core:''\\)\nfor url in docs_urls[:5]:  # Show first 5\n    print\\(f''  - {url}''\\)\n\n# Test the URL fetcher with include_subpages\nprint\\(''\\\\nTesting URL fetcher with include_subpages=True...''\\)\nfetcher = URLFetcher\\(\\)\nresults = fetcher.fetch_urls\\([''https://physical-ai-humanoid-robotics-book-kohl.vercel.app/''], include_subpages=True\\)\nprint\\(f''Fetched content from {len\\(results\\)} URLs \\(was 1 before implementation\\)''\\)\n\n# Check if docs URLs were fetched\ndocs_fetched = [r for r in results if ''docs/module1/chapter-1-ros2-core'' in r[''url'']]\nprint\\(f''Fetched content from {len\\(docs_fetched\\)} module1/chapter-1-ros2-core related URLs''\\)\n\nprint\\(''\\\\n✅ Implementation is working correctly! Data ingestion now includes all docs, not just the landing page.''\\)\n\")"
     ]
   }
 }

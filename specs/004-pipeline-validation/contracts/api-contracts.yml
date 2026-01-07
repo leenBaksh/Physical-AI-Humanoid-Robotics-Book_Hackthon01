@@ -1,0 +1,128 @@
+# API Contracts: Pipeline Validation & Query Testing
+
+# This file describes the function interfaces for the retrieve.py module
+
+openapi: 3.0.0
+info:
+  title: Pipeline Validation & Query Testing API
+  version: 1.0.0
+  description: Functions for validating Qdrant collection integrity and performing similarity searches
+
+paths: {}
+
+components:
+  schemas:
+    ContentChunk:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the chunk
+        content:
+          type: string
+          description: The actual text content of the chunk
+        source_url:
+          type: string
+          description: URL of the original source page
+        chunk_index:
+          type: integer
+          description: Index position of the chunk in the original document
+        metadata:
+          type: object
+          additionalProperties: true
+          description: Additional metadata about the content
+        embedding:
+          type: array
+          items:
+            type: number
+          description: Vector embedding of the content (optional)
+        created_at:
+          type: string
+          format: date-time
+          description: Timestamp when the chunk was created
+      required:
+        - id
+        - content
+        - source_url
+        - chunk_index
+        - metadata
+        - created_at
+
+    ValidationResult:
+      type: object
+      properties:
+        total_chunks:
+          type: integer
+          description: Total number of chunks in the collection
+        expected_chunks:
+          type: integer
+          description: Expected number of chunks (if known)
+        validation_passed:
+          type: boolean
+          description: Whether validation passed
+        sample_checks:
+          type: array
+          items:
+            type: object
+            properties:
+              original_content:
+                type: string
+              stored_content:
+                type: string
+              match:
+                type: boolean
+          description: Sample validation checks
+        errors:
+          type: array
+          items:
+            type: string
+          description: Any errors found during validation
+
+    QueryResult:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the matched chunk
+        content:
+          type: string
+          description: Content snippet of the matched chunk
+        source_url:
+          type: string
+          description: Source URL of the matched chunk
+        chunk_index:
+          type: integer
+          description: Index position of the chunk
+        score:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 1.0
+          description: Similarity score (higher is more similar)
+        metadata:
+          type: object
+          additionalProperties: true
+          description: Additional metadata
+        created_at:
+          type: string
+          format: date-time
+          description: When the chunk was created
+
+    QueryResponse:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The original query string
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/QueryResult'
+          description: Ranked list of matching results
+        total_results:
+          type: integer
+          description: Total number of results returned
+        execution_time:
+          type: number
+          format: float
+          description: Time taken to execute the query in seconds

@@ -338,13 +338,13 @@
 
   /* Touch-optimized styles */
   .buttons {
-    gap: 2rem; /* Increased spacing */
+    gap: 1rem; /* Increased spacing */
   }
 
   .button {
-    min-height: 44px; /* Minimum touch target height */
-    min-width: 44px; /* Minimum touch target width */
-    padding: 1rem 1.5rem; /* Increased padding */
+    min-height: 25px; /* Minimum touch target height */
+    min-width: 25px; /* Minimum touch target width */
+    padding: 1rem 1.rem; /* Increased padding */
     font-size: 1.1rem; /* Larger text for better readability */
   }
 }
@@ -406,14 +406,14 @@
 
   /* Touch-optimized styles */
   .buttons {
-    gap: 2rem; /* Increased spacing */
+    gap: 1rem; /* Increased spacing */
   }
 
   .button {
-    min-height: 44px; /* Minimum touch target height */
-    min-width: 44px; /* Minimum touch target width */
-    padding: 1rem 1.5rem; /* Increased padding */
-    font-size: 1.1rem; /* Larger text for better readability */
+    min-height: 25px; /* Minimum touch target height */
+    min-width:25px; /* Minimum touch target width */
+    padding: 0rem 1.1rem; /* Increased padding */
+    font-size: 1rem; /* Larger text for better readability */
   }
 }
 
@@ -613,7 +613,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 1.2rem;
   margin-top: 3rem;
   position: relative;
   z-index: 2;

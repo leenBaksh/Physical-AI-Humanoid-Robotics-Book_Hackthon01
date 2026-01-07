@@ -1,0 +1,54 @@
+.chatBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 996px) {
+  .chatBanner {
+    padding: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.chatMain {
+  padding: 2rem 0;
+  flex: 1;
+}
+
+.chatContainer {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (max-width: 768px) {
+  .chatContainer {
+    padding: 0 0.5rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* Additional styling for better integration */
+.chatContainer h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #4d4c4c;
+}
+
+.chatContainer p {
+  text-align: center;
+  color: #060606;
+  margin-bottom: 2rem;
+}

@@ -97,13 +97,15 @@ const config = {
             position: "left",
             label: "Tutorial",
           },
-          { to: "/blog", label: "Blog", position: "left" },
+          { to: "/chat", label: "🤖 AI Chat", position: "left" },
+          { to: "/blog", label: "📰 Blog", position: "left" },
           {
             href: "https://github.com/leenBaksh/Physical-AI-Humanoid-Robotics-Book_Hackthon01/tree/002-docusaurus-config/frontend_robotic_book",
-            label: "GitHub",
+            label: "🐙 GitHub",
             position: "right",
           },
         ],
+        style: "primary",
       },
       footer: {
         style: "dark",

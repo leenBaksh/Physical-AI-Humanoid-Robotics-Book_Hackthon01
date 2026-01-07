@@ -1,5 +1,12 @@
 {
-    "cSpell.words": [
-        "Supabase"
-    ]
+  "cSpell.words": [
+    "chunker",
+    "devstral",
+    "embedder",
+    "Embedder",
+    "mistralai",
+    "openai",
+    "qdrant",
+    "uvicorn"
+  ]
 }

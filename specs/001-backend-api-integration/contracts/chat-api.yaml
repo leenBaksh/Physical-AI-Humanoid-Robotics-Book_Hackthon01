@@ -1,0 +1,130 @@
+openapi: 3.0.0
+info:
+  title: Book Content Chat API
+  description: API for interacting with the Book Content RAG agent
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Local development server
+
+paths:
+  /chat:
+    post:
+      summary: Process a user message and return an AI response
+      description: Sends a user message to the BookAgent for processing and returns a response with source citations
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+      responses:
+        '200':
+          description: Successful response from the BookAgent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Invalid request format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    ChatRequest:
+      type: object
+      required:
+        - message
+        - session_id
+      properties:
+        message:
+          type: string
+          description: The user's message
+          example: "What is ROS2?"
+        session_id:
+          type: string
+          description: Unique identifier for the conversation session
+          example: "session-12345"
+        options:
+          type: object
+          description: Additional options for the request
+          properties:
+            top_k:
+              type: integer
+              description: Number of chunks to retrieve (default: 5)
+              example: 5
+            temperature:
+              type: number
+              description: Controls randomness in responses (default: 0.3)
+              example: 0.3
+
+    ChatResponse:
+      type: object
+      required:
+        - answer
+        - citations
+        - session_id
+        - timestamp
+      properties:
+        answer:
+          type: string
+          description: The AI's response to the user's question
+          example: "ROS2 (Robot Operating System 2) is a flexible framework for writing robot applications..."
+        citations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Citation'
+          description: List of sources used in the response
+        session_id:
+          type: string
+          description: The session ID this response belongs to
+          example: "session-12345"
+        timestamp:
+          type: string
+          format: date-time
+          description: When the response was generated
+          example: "2026-01-02T05:00:00Z"
+
+    Citation:
+      type: object
+      required:
+        - url
+        - title
+      properties:
+        url:
+          type: string
+          description: URL of the source
+          example: "https://physical-ai-humanoid-robotics-book-kohl.vercel.app/docs/module1/chapter-1-ros2-core/"
+        title:
+          type: string
+          description: Title of the source
+          example: "Chapter 1 - ROS2 Core Concepts"
+
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error code
+          example: "INTERNAL_ERROR"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "An internal error occurred while processing the request"
+        timestamp:
+          type: string
+          format: date-time
+          description: When the error occurred
+          example: "2026-01-02T05:00:00Z"

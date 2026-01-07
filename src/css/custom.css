@@ -247,9 +247,9 @@
     --ifm-font-size-base: 16px;
     --card-padding: 2.5rem;
     --card-corner-size: 30px;
-    --h1-size: 3.25rem;
-    --h2-size: 2.125rem;
-    --h3-size: 1.75rem;
+    --h1-size: 3.4rem;
+    --h2-size: 2.15rem;
+    --h3-size: 1.35rem;
   }
   
   .navbar__inner {
@@ -390,18 +390,18 @@
     --h3-size: 1.25rem;
     --button-padding-vertical: 0.625rem;
     --button-padding-horizontal: 1.25rem;
-    --button-font-size: 0.75rem;
+    --button-font-size: 0.55rem;
     --button-min-height: 40px;
   }
   
   .navbar__brand {
-    font-size: 1.25rem !important;
-    gap: 0.5rem;
+    font-size: 1.15rem !important;
+    gap: 0.2rem;
   }
   
   .hero__buttons {
     flex-direction: column;
-    gap: 0.75rem !important;
+    gap: 0.55rem !important;
   }
 }
 
@@ -414,7 +414,7 @@
   }
   
   .navbar {
-    height: 5rem;
+    height: 3rem;
   }
   
   .card {
@@ -507,7 +507,7 @@
 
 .hero__buttons {
   margin-top: 4rem !important;
-  gap: 2rem !important;
+  gap: 1rem !important;
 }
 
 /* Cards */
@@ -635,7 +635,7 @@ html[data-theme='dark'] {
   }
   
   .card {
-    border-width: 4px;
+    border-width: 6px;
   }
 }
 
